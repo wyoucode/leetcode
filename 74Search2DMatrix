@@ -1,0 +1,45 @@
+// find a number in a sorted matrix.
+	public void findNumber(int[][] matrix, int number) {
+		int column = findRow(0, matrix.length - 1, matrix, number);
+		// find in the row
+
+		// BinarySearch in column.
+		binarySearch(number, 0, matrix[0].length, matrix, column);
+	}
+
+	public void binarySearch(int number, int low, int high, int[][] row,
+			int column) {
+		if (low > high) {
+			System.out.println("No result");
+		}
+		int mid = low + (high - low) / 2;
+		if (number > row[column][mid]) {
+			binarySearch(number, mid + 1, high, row, column);
+		} else if (number < row[column][mid]) {
+			binarySearch(number, low, mid - 1, row, column);
+		} else {
+			if (number == row[column][mid]) {
+				System.out.println("find in: " + column + " " + mid);
+			} else
+				System.out.println("No result");
+		}
+
+	}
+
+	public int findRow(int low, int high, int[][] column, int number) {
+		if ((high - low) == 1) {
+			int i = column[high][0];
+			if (i <= number)
+				return high;
+			else
+				return low;
+		}
+
+		int mid = low + (high - low) / 2;
+		if (number < column[mid][0]) {
+			return findRow(low, mid, column, number);
+		} else if (number > column[mid][0]) {
+			return findRow(mid, high, column, number);
+		} else
+			return mid;
+	}
