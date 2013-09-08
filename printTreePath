@@ -1,0 +1,14 @@
+	// print the tree into number
+	public void printTreePath(TreeNode root, int prefix) {
+		if (root != null) {
+			prefix = prefix * 10 + root.val;
+			if ((root.left == null) && (root.right == null)) {
+				sum = sum + prefix;
+				System.out.println("prefix is:" + prefix);
+				System.out.println("Sum is:" + sum);
+			} else {
+				printTreePath(root.left, prefix);
+				printTreePath(root.right, prefix);
+			}
+		}
+	}
